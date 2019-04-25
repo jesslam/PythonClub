@@ -31,11 +31,10 @@ class MeetingMinutes(models.Model):
 
 class Resource(models.Model):
     resourcename=models.CharField(max_length=255)
-    resourcetype=models.CharField(max_length=255)
+    resourcedescription=models.CharField(max_length=255)
     resourceurl=models.URLField(null=True, blank=True)
     resourceentrydate=models.DateField()
     user=models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    resourcedescription=models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.resourcename
