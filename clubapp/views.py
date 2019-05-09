@@ -10,12 +10,19 @@ def getResources(request):
     context={'resources_list' : resources_list}
     return render(request, 'clubapp/resources.html', context=context)
 
+def resourceDetails(request, id):
+    resce=get_object_or_404(Resource, pk=id)
+    context = {
+        'resce' : resce,
+    }
+    return render(request, 'clubapp/resourcedetails.html', context=context)
+
 def getMeetings(request):
     meeting_list=Meeting.objects.all()
     return render(request, 'clubapp/meetings.html', {'meeting_list' : meeting_list})
 
 def meetingDetails(request, id):
-    meet=get_object_or_404(MeetingMinutes, pk=id)
+    meet=get_object_or_404(Meeting, pk=id)
     context = {
         'meet' : meet,
     }

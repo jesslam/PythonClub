@@ -8,7 +8,7 @@
 </tr>
 {% for r in resources_list %}
 <tr>
-    <td><a href="{% url 'resourcedetail' id=r.id %}">{{r.resourcename}}</a></td>
+    <td><a href="{{ r.resourceurl }}">{{r.resourcename}}</a></td>
     <td>{{r.resourcedescription}}</td>
 </tr>
 {% endfor %}
