@@ -2,7 +2,8 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Meeting, MeetingMinutes, Resource, Event
 from django.contrib.auth.models import User
-
+from .forms import ResourceForm
+import datetime
 
 
 # Create your tests here.
@@ -47,5 +48,29 @@ class GetMeetingsTest(TestCase):
         response=self.client.get(reverse('meetings'))
         self.assertEqual(response.status_code, 200)
 
+class ResourceFormTest(TestCase):
+    def setUp(self):
+        self.user=User.objects.create(username='user2', password='P@ssw0rd1')
+    
+    def test_ResourceForm(self):
+        data={
+            'resourcename' : 'resource2',
+            'resourceentrydate' : datetime.date(2019,5,30),
+            'user' : self.user,
 
+        }
+        form=ResourceForm(data=data)
+        self.assertTrue(form.is_valid)
+
+    def test_ResourceFormInvalid(self):
+        data={
+            'resourcename' : 'resource2',
+            'resourceentrydate' : datetime.date(2019,5,30),
+            'user' : self.user,
+
+        }
+        form=ResourceForm(data=data)
+        self.assertFalse(form.is_valid())
+
+    
 
